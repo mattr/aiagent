@@ -1,5 +1,6 @@
 import argparse
 import os
+
 from dotenv import load_dotenv
 from google.genai import types
 
@@ -29,4 +30,3 @@ if args.verbose:
     print(f"User prompt: {args.user_prompt}")
     print(f"Prompt tokens: {response.usage_metadata.prompt_token_count}")
     print(f"Response tokens: {response.usage_metadata.candidates_token_count}")
-
