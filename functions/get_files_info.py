@@ -45,3 +45,11 @@ def get_file_content(working_directory, file_path):
         return f'Error: "{file_path}" is not in the working directory'
 
     return file_content_string
+
+
+def write_file(working_directory, file_path, content):
+    path = os.path.join(os.path.abspath(working_directory), file_path)
+    if not os.path.exists(path):
+        os.makedirs(path)
+    with open(path, "w") as f:
+        f.write(content)
