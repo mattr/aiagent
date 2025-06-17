@@ -22,34 +22,3 @@ def get_files_info(working_directory, directory=None):
         return "\n".join(files_info)
     except Exception as e:
         return f"Error listing files: {e}"
-
-
-MAX_CHARS = 10000
-
-
-def get_file_content(working_directory, file_path):
-    root = os.path.abspath(working_directory)
-    try:
-        path = os.path.join(root, file_path)
-    except FileNotFoundError:
-        return f'Error: "{file_path}" is not a file'
-    if not os.path.isfile(path):
-        return f'Error: File not found or is not a regular file: "{file_path}"'
-
-    try:
-        with open(path, "r") as f:
-            file_content_string = f.read(MAX_CHARS)
-            file_content_string = file_content_string + f'[...File "{file_path}" truncated at {MAX_CHARS} characters]'
-
-    except ValueError:
-        return f'Error: "{file_path}" is not in the working directory'
-
-    return file_content_string
-
-
-def write_file(working_directory, file_path, content):
-    path = os.path.join(os.path.abspath(working_directory), file_path)
-    if not os.path.exists(path):
-        os.makedirs(path)
-    with open(path, "w") as f:
-        f.write(content)
